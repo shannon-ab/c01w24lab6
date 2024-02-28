@@ -1,0 +1,20 @@
+# Use the official Node.js 14 image as the base image
+FROM node:20.0.0-alpine AS backend
+
+# Set the working directory inside the container
+WORKDIR /app/quirknotes/backend
+
+# Copy frontend package files
+COPY quirknotes/backend/package*.json ./
+
+# Install the dependencies
+RUN npm install
+
+# Copy backend source code
+COPY quirknotes/backend ./
+
+# Expose port 4000 to serve the frontend
+EXPOSE 4000
+
+# Start the application
+CMD ["npm", "start"]
